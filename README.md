@@ -1,4 +1,4 @@
-# # MVC .Net Core Drag and Drop File Upload Demo
+# MVC .Net Core Drag and Drop File Upload Demo
 
 A simple demo showing how drag and drop uploading works in .Net Core Web applications.
 
@@ -13,9 +13,3 @@ git clone https://github.com/raymordy/MVCCoreDragDropFileUpload.git
 ```
 
 alternatively you can use the download link.
-
-
-
-## Packages Used
-
-- jquery.filedrop (1.0.1)
