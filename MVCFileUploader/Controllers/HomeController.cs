@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MVCFileUploader.Models;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace MVCFileUploader.Controllers
 {
@@ -41,25 +38,27 @@ namespace MVCFileUploader.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFiles(List<IFormFile> files)
+        public async Task<IActionResult> UploadFile(IFormFile file)
         {
-            long size = files.Sum(f => f.Length);
-
-            foreach(var file in files)
+            try
             {
-                if(file.Length > 0)
+                if (file.Length > 0)
                 {
                     string folderRoot = Path.Combine(_environment.ContentRootPath, "Uploads");
-                    string filePath =  Guid.NewGuid() + Path.GetExtension(file.FileName);
+                    string filePath = Guid.NewGuid() + Path.GetExtension(file.FileName);
                     filePath = Path.Combine(folderRoot, filePath);
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                     }
                 }
+                return Ok(new { success = true, message = "File Uploaded" });
             }
-
-            return Ok(new { count = files.Count, size });
+            catch (Exception)
+            {
+                return BadRequest(new { success = false, message = "Error file failed to upload" });
+            }
         }
     }
 }
+

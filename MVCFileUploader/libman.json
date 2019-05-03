@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+	"libraries": [
+		{
+			"library": "dropzone@5.5.1",
+			"destination": "wwwroot/lib/dropzone/",
+			"files": [
+				"min/dropzone.min.js",
+				"min/dropzone-amd-module.min.js",
+				"min/dropzone.min.css",
+				"dropzone-amd-module.js",
+				"dropzone.css",
+				"dropzone.js"
+			]
+		}
+	]
+}
